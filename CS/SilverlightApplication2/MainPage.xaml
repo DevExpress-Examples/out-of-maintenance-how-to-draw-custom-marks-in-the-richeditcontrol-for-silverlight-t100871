@@ -1,0 +1,75 @@
+﻿<UserControl d:DesignHeight="600" 
+			 d:DesignWidth="800" 
+			 mc:Ignorable="d" 
+			 x:Class="SilverlightApplication2.MainPage" 
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+			 xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+			 xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
+			 xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit" 
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+        <dxre:RichEditUICommand x:Key="commands" />
+        <dxre:RichEditStringIdConverter x:Key="stringIdConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <dxb:BarManager x:Name="barManager1" ToolbarGlyphSize="Small">
+            <dxb:BarManager.Items>
+                <dxb:BarCheckItem x:Name="biViewDraft" Command="{Binding ViewDraft, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarCheckItem x:Name="biViewPrintLayout" Command="{Binding ViewPrintLayout, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarCheckItem x:Name="biViewSimple" Command="{Binding ViewSimple, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarCheckItem x:Name="biViewHorizontalRuler" Command="{Binding ViewHorizontalRuler, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarCheckItem x:Name="biViewVerticalRuler" Command="{Binding ViewVerticalRuler, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarButtonItem x:Name="biViewZoomOut" Command="{Binding ViewZoomOut, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarButtonItem x:Name="biViewZoomIn" Command="{Binding ViewZoomIn, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarButtonItem x:Name="barButtonItem1" RibbonStyle="Large" Content="Set Custom Mark" ItemClick="barButtonItem1_ItemClick"/>
+            </dxb:BarManager.Items>
+
+            <dx:DockPanel>
+                <dxr:RibbonControl x:Name="ribbonControl1" dx:DockPanel.Dock="Top">
+                    <dxr:RibbonDefaultPageCategory>
+                        <dxr:RibbonPage x:Name="pageView"
+								Caption="{Binding ConverterParameter=Caption_PageView, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
+                            <dxr:RibbonPageGroup x:Name="grpDocumentViews"
+									Caption="{Binding ConverterParameter=Caption_GroupDocumentViews, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}"
+									ShowCaptionButton="False">
+                                <dxb:BarCheckItemLink BarItemName="biViewDraft" />
+                                <dxb:BarCheckItemLink BarItemName="biViewPrintLayout" />
+                                <dxb:BarCheckItemLink BarItemName="biViewSimple" />
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpShow"
+									Caption="{Binding ConverterParameter=Caption_GroupShow, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}"
+									ShowCaptionButton="False">
+                                <dxb:BarCheckItemLink BarItemName="biViewHorizontalRuler" />
+                                <dxb:BarCheckItemLink BarItemName="biViewVerticalRuler" />
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup x:Name="grpZoom"
+									Caption="{Binding ConverterParameter=Caption_GroupZoom, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}"
+									ShowCaptionButton="False">
+                                <dxb:BarButtonItemLink BarItemName="biViewZoomOut" />
+                                <dxb:BarButtonItemLink BarItemName="biViewZoomIn" />
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup Caption="Custom Marks">
+                                <dxb:BarButtonItemLink BarItemName="barButtonItem1"/>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                    </dxr:RibbonDefaultPageCategory>
+                </dxr:RibbonControl>
+
+                <Grid Name="grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <dxre:RichEditControl Grid.Row="0" x:Name="richEditControl1" CustomMarkDraw="richEditControl1_CustomMarkDraw" BarManager="{Binding ElementName=barManager1, Mode=OneTime}"
+							Ribbon="{Binding ElementName=ribbonControl1, Mode=OneTime}" />
+                    <Canvas x:Name="richEditCanvas" />
+                </Grid>
+            </dx:DockPanel>
+        </dxb:BarManager>
+    </Grid>
+</UserControl>
