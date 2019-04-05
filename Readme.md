@@ -1,7 +1,7 @@
 <!-- default file list -->
 *Files to look at*:
 
-* [MainPage.xaml](./CS/SilverlightApplication2/MainPage.xaml) (VB: [MainPage.xaml.vb](./VB/SilverlightApplication2/MainPage.xaml.vb))
+* [MainPage.xaml](./CS/SilverlightApplication2/MainPage.xaml) (VB: [MainPage.xaml](./VB/SilverlightApplication2/MainPage.xaml))
 * [MainPage.xaml.cs](./CS/SilverlightApplication2/MainPage.xaml.cs) (VB: [MainPage.xaml.vb](./VB/SilverlightApplication2/MainPage.xaml.vb))
 <!-- default file list end -->
 # How to draw custom marks in the RichEditControl for Silverlight
